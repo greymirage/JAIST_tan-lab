@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丹研究室 論文データ管理パネル</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Modularized Style Sheets -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <h1>丹研究室 論文データ管理パネル</h1>
+                <p>管理者専用データインポート・書き出しツール</p>
+            </div>
+            <nav>
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> メインダッシュボードに戻る</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- IMPORT CARD -->
+        <section class="card">
+            <div class="card-title">
+                <i class="fa-solid fa-file-import"></i> 新しい論文データのインポート (HTML table 貼り付け)
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.5;">
+                DSpace登録情報の詳細ページからコピーした <code>&lt;table class="itemDisplayTable"&gt;...&lt;/table&gt;</code> のHTMLデータを下のテキストエリアに直接貼り付け、「インポートを実行」を押します。
+            </p>
+            <textarea id="admin-html-input" rows="10" placeholder='<table class="itemDisplayTable">&#10;<tbody><tr><td class="metadataFieldLabel">タイトル:&nbsp;</td><td class="metadataFieldValue">...</td></tr>&#10;...&#10;</tbody></table>'></textarea>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="handleImport()"><i class="fa-solid fa-check"></i> インポートを実行</button>
+                <button class="btn btn-danger" onclick="handleClearAll()"><i class="fa-solid fa-trash-can"></i> インポートしたカスタムデータを全削除</button>
+                <button class="btn btn-success" style="margin-left: auto;" onclick="handleExport()"><i class="fa-solid fa-download"></i> 統合版 data.js の書き出し・保存</button>
+            </div>
+            <div id="admin-message"></div>
+        </section>
+
+        <!-- CUSTOM DATA LIST -->
+        <section class="card">
+            <div class="card-title">
+                <i class="fa-solid fa-list"></i> 現在インポートされているカスタム論文一覧 (<span id="custom-count">0</span> 件)
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="custom-list-table">
+                    <thead>
+                        <tr>
+                            <th>学位</th>
+                            <th>年度</th>
+                            <th>タイトル</th>
+                            <th>著者</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="custom-list-body">
+                        <!-- Dynamic list -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Data & Scripts -->
+    <script src="data.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
