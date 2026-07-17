@@ -383,7 +383,7 @@ function handleExport() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     
-    showMessage("統合された data.js を出力しました。現在のフォルダの data.js に上書き保存してください。", "green");
+    showMessage("統合された data.js を出力しました。現在のフォルダの data/data.js に上書き保存してください。", "green");
 }
 
 // Initialize

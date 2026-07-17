@@ -13,8 +13,27 @@ document.addEventListener("DOMContentLoaded", () => {
     let chatLogs = [];    // format: { timestamp: Date, sender: string, text: string }
     let isGenerating = false;
 
+    // Helper to decode Base64 obfuscated key if provided
+    function getDecryptedKey(key) {
+        if (!key) return "";
+        const trimmed = key.trim();
+        if (trimmed.startsWith("AIzaSy")) {
+            return trimmed;
+        }
+        try {
+            const decoded = atob(trimmed);
+            if (decoded.startsWith("AIzaSy")) {
+                return decoded;
+            }
+        } catch (e) {
+            // Decyption failed
+        }
+        return trimmed;
+    }
+
     // Verify API Key from config.js
-    const apiKey = typeof GEMINI_API_KEY !== 'undefined' ? GEMINI_API_KEY : "YOUR_API_KEY_HERE";
+    const apiKeyRaw = typeof GEMINI_API_KEY !== 'undefined' ? GEMINI_API_KEY : "YOUR_API_KEY_HERE";
+    const apiKey = getDecryptedKey(apiKeyRaw);
     const isApiKeyConfigured = apiKey && apiKey !== "YOUR_API_KEY_HERE" && apiKey.trim() !== "";
 
     if (!isApiKeyConfigured) {
@@ -144,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Custom system instruction for clean academic style
         const systemPrompt = `
 あなたは北陸先端科学技術大学院大学（JAIST）情報科学系・丹康雄教授の研究室の「研究アシスタント」です。
-M1新入生が先輩方の研究を理解し、自分の研究テーマのアイデアを検討するのをサポートします。
+研究室に所属する学生や新入生が先輩方の研究を理解し、自分の研究テーマのアイデアを検討するのをサポートします。
 
 【提供された過去の学位論文データ】
 以下は2000年度から2026年度までの修士・博士学位論文の一覧です：
