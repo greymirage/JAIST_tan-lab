@@ -618,3 +618,145 @@ main {
 .yearly-link-classic a:hover {
     color: #000000;
 }
+
+/* ===== About / Welcome Card ===== */
+.about-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-left: 5px solid var(--accent-cyan);
+    padding: 2.2rem;
+    margin-bottom: 2rem;
+}
+
+.about-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.about-icon {
+    font-size: 2.5rem;
+    color: var(--accent-cyan);
+    background: rgba(0, 64, 128, 0.08);
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.about-title-group h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.about-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.about-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+    .about-steps {
+        grid-template-columns: 1fr;
+    }
+}
+
+.about-step {
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.2s;
+}
+
+.about-step:hover {
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.step-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-cyan);
+    opacity: 0.5;
+    font-family: var(--font-outfit);
+}
+
+.step-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+.about-footer-action {
+    border-top: 1px solid var(--card-border);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (max-width: 800px) {
+    .about-footer-action {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.2rem;
+    }
+}
+
+.about-note {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+.about-note i {
+    color: var(--accent-cyan);
+    margin-right: 0.2rem;
+}
+
+.cta-button {
+    background: var(--accent-cyan);
+    color: #ffffff;
+    padding: 0.75rem 1.6rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 64, 128, 0.15);
+}
+
+.cta-button:hover {
+    background: #003366;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0, 64, 128, 0.2);
+}

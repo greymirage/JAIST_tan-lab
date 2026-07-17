@@ -29,11 +29,54 @@
                 <a href="#keywords">キーワード分析</a>
                 <a href="#heatmap">時系列ヒートマップ</a>
                 <a href="#list">論文検索</a>
+                <a href="ai.html" style="color: var(--accent-cyan); font-weight: bold; display: inline-flex; align-items: center; gap: 0.3rem;"><i class="fa-solid fa-robot"></i> AIアシスタント</a>
             </nav>
         </div>
     </header>
 
     <main>
+        <!-- WELCOME & PURPOSE PANEL (ABOUT) -->
+        <section id="about" class="col-12 card about-card">
+            <div class="about-header">
+                <div class="about-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="about-title-group">
+                    <h2>M1新生のための学位論文・研究トレンド探索</h2>
+                    <p class="about-subtitle">このダッシュボードは、M1新入生が当研究室の過去の研究成果を効率的に理解し、自身の研究テーマの決定や進むべき方向性を迅速に見つけられるよう設計されています。</p>
+                </div>
+            </div>
+            
+            <div class="about-steps">
+                <div class="about-step">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h3>研究室の歴史・変遷を掴む</h3>
+                        <p>「年度推移」で学位論文の発表数トレンドを、「キーワード分析」や「ヒートマップ」で研究の関心が時代とともにどう変化したか直感的に把握します。</p>
+                    </div>
+                </div>
+                <div class="about-step">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h3>先輩方の研究を絞り込む</h3>
+                        <p>「論文検索」でキーワード、年度、またはフリーワードを使って絞り込み、クラシックな「年度別一覧」などで気になる論文のDSpace（学術リポジトリ）の原著リンクへジャンプします。</p>
+                    </div>
+                </div>
+                <div class="about-step">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h3>AIアシスタントに相談する</h3>
+                        <p>右上の「🤖 AIアシスタント」タブから専用のチャット画面へ移動し、過去26年分のデータ（計103件）に基づいて研究テーマの相談やアイデアの壁打ちを行うことができます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-footer-action">
+                <span class="about-note">
+                    <i class="fa-solid fa-shield-halved"></i> <strong>データ保護に関して:</strong> 本システムで用いている情報は、論文名・著者名・発表年度・キーワードなど、JAIST学術研究成果リポジトリ（DSpace）で一般公開されている書誌情報のみを使用しています。論文の本文内容（非公開・制限データ等）は含みません。
+                </span>
+                <a href="ai.html" class="cta-button"><i class="fa-solid fa-robot"></i> AIアシスタントに質問する</a>
+            </div>
+        </section>
+
         <!-- STATS PANEL -->
         <section id="stats" class="col-12 card">
             <div class="stats-grid">

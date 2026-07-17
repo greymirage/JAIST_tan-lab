@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI研究アシスタント | 丹研究室</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styling -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ai.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <h1>北陸先端科学技術大学院大学<br>丹研究室　ロンブン</h1>
+                <p>AI研究テーマ発掘アシスタント</p>
+            </div>
+            <nav>
+                <a href="index.html"><i class="fa-solid fa-arrow-left-long"></i> メインダッシュボードへ戻る</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="ai-main-container">
+        <!-- AI EXPLANATION & DISCLAIMER CARD -->
+        <section class="col-12 card disclaimer-card">
+            <div class="disclaimer-header">
+                <i class="fa-solid fa-circle-info"></i>
+                <h2>AI研究アシスタントについて</h2>
+            </div>
+            <div class="disclaimer-body">
+                <p>このAIアシスタントは、過去26年分（2000〜2026年度）の修士・博士学位論文データ（計103件）に基づいて、M1新生の皆さんの研究テーマ選びや壁打ちをサポートします。</p>
+                <ul>
+                    <li><i class="fa-solid fa-shield-check"></i> <strong>使用データについて:</strong> 本システムでAIが参照するデータは、論文タイトル・著者名・年度・キーワードなどの<strong>一般公開されている書誌情報のみ</strong>です。論文本文や概要（非公開・制限データ含む）は読み込まれていません。</li>
+                    <li><i class="fa-solid fa-microchip"></i> <strong>使用AIモデル:</strong> Google提供の <strong>Gemini 3.5 Flash</strong> 大規模言語モデルを使用しています。</li>
+                    <li><i class="fa-solid fa-triangle-exclamation"></i> <strong>免責事項:</strong> AIが生成した内容は時として誤りや不正確な内容を含む場合があります。<strong>出力された回答はあくまで参考意見</strong>とし、最終的な研究テーマの決定や具体的な進め方については、必ず指導教員（丹教授）と相談し合意を得るようにしてください。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- API KEY SETTING CARD -->
+        <section id="api-key-section" class="col-12 card api-key-card">
+            <div class="api-key-header">
+                <i class="fa-solid fa-key"></i>
+                <h2>Gemini APIキーの設定</h2>
+            </div>
+            <p class="api-key-description">
+                AIチャット機能を利用するには、ご自身の <strong>Gemini APIキー</strong> が必要です。
+                キーは完全に安全であり、お客様のブラウザ（LocalStorage）にのみ保存され、開発者を含む外部サーバーには一切送信されません。
+                <br>
+                <em>※APIキーをお持ちでない場合は、<a href="https://aistudio.google.com/" target="_blank" style="color: var(--accent-cyan); text-decoration: underline; font-weight: 600;">Google AI Studio</a> から無料で取得できます。</em>
+            </p>
+            <div class="api-key-input-group">
+                <input type="password" id="api-key-input" placeholder="AI Studio から取得した API キーを入力 (AIzaSy...)" />
+                <button id="btn-save-api-key" class="btn-primary-action"><i class="fa-solid fa-check"></i> 保存して開始</button>
+            </div>
+            <p id="api-key-status-msg" style="display:none; font-size: 0.82rem; margin-top: 0.8rem; font-weight: 600;"></p>
+        </section>
+
+        <!-- CHAT AREA -->
+        <section id="chat-section" class="col-12 card chat-card" style="display:none;">
+            <div class="chat-header-actions">
+                <div class="chat-status">
+                    <span class="status-indicator"></span>
+                    <span>AIアシスタント稼働中 (Gemini 3.5 Flash)</span>
+                </div>
+                <div class="chat-buttons">
+                    <button id="btn-clear-chat" class="chat-action-btn"><i class="fa-solid fa-trash-can"></i> チャットをクリア</button>
+                    <button id="btn-export-chat" class="chat-action-btn highlight"><i class="fa-solid fa-download"></i> 対話ログを保存 (.txt)</button>
+                </div>
+            </div>
+
+            <!-- CHAT CONVERSATION WINDOW -->
+            <div class="chat-window" id="chat-messages-container">
+                <!-- Welcome Message from AI -->
+                <div class="message assistant">
+                    <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="message-content">
+                        こんにちは！丹研究室の学位論文データベースをもとに、研究テーマ選定のお手伝いをします。<br>
+                        以下のような質問や、その他興味のあるテーマについてお気軽に聞いてください。
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUGGESTION CHIPS -->
+            <div class="suggestion-chips-container">
+                <span class="chips-label">クイック質問例:</span>
+                <div class="suggestion-chips">
+                    <button class="chip" onclick="sendSuggestion('スマートホームに関連する先輩方の研究テーマを教えてください。')">スマートホームの論文</button>
+                    <button class="chip" onclick="sendSuggestion('最近5年間（2021〜2026年）の丹研究室の研究トレンドはどうなっていますか？')">最近のトレンド</button>
+                    <button class="chip" onclick="sendSuggestion('IoTと機械学習を組み合わせた研究テーマはどのようなものがありますか？')">IoT × 機械学習</button>
+                    <button class="chip" onclick="sendSuggestion('研究テーマをこれから探すにあたって、M1新生へのアドバイスをください。')">テーマ探しのアドバイス</button>
+                </div>
+            </div>
+
+            <!-- INPUT FIELD AREA -->
+            <div class="chat-input-area">
+                <textarea id="chat-input-text" placeholder="質問を入力してください... (Shift+Enterで改行、Enterで送信)"></textarea>
+                <button id="btn-send-message" class="btn-send"><i class="fa-solid fa-paper-plane"></i> 送信</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating API Key settings button (visible once key is set so user can change it) -->
+    <button id="btn-floating-key-config" class="floating-key-btn" style="display:none;" title="APIキーを再設定"><i class="fa-solid fa-key"></i></button>
+
+    <!-- Data & Scripts -->
+    <script src="data_ai.js"></script>
+    <script src="js/ai.js"></script>
+</body>
+</html>
