@@ -96,11 +96,6 @@ function initStats() {
     const uniqueKws = new Set(allKws);
     document.getElementById('stat-keywords').textContent = uniqueKws.size;
 
-    // Dynamic copyright year in footer
-    const footerYearEl = document.getElementById('footer-year');
-    if (footerYearEl) {
-        footerYearEl.textContent = new Date().getFullYear();
-    }
 
     // Dynamic years & count in About section
     const years = window.ALL_DATA.map(t => t.year).filter(Boolean);

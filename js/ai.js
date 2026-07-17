@@ -56,8 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (aiYearsEl) aiYearsEl.textContent = `${dynamicMinYear}〜${dynamicMaxYear}年度`;
     const aiCountEl = document.getElementById("ai-total-count");
     if (aiCountEl) aiCountEl.textContent = dynamicTotalCount;
-    const footerYearEl = document.getElementById("footer-year");
-    if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+
 
     // Verify API Key from config.js
     const apiKeyRaw = typeof GEMINI_API_KEY !== 'undefined' ? GEMINI_API_KEY : "YOUR_API_KEY_HERE";
