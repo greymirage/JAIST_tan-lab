@@ -1,9 +1,14 @@
 /* ===== Minimal Academic Q&A Assistant Stylesheet ===== */
 
 .ai-main-container {
-    max-width: 900px;
-    margin: 2rem auto;
+    max-width: 1200px;
+    width: 95%;
+    margin: 1.5rem auto;
     padding: 0 1.5rem;
+    height: calc(100vh - 150px);
+    min-height: 580px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Chat Card: Clean, Flat and Minimal */
@@ -11,10 +16,11 @@
     background: #ffffff;
     border: 1px solid var(--card-border);
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     display: flex;
     flex-direction: column;
-    height: 720px;
+    flex-grow: 1;
+    height: 100%;
     box-shadow: none; /* Flat design */
 }
 
