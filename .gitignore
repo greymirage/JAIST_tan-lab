@@ -16,3 +16,5 @@ Desktop.ini
 # System files
 .agents/
 .gemini/
+config.js
+
