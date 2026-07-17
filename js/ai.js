@@ -134,10 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // === Gemini API Call ===
     async function sendMessageToGemini(userText) {
         if (isGenerating) return;
-        if (!isApiKeyConfigured) {
-            appendSystemWarning("警告: `config.js` の `GEMINI_API_KEY` を設定するまで、メッセージを送信できません。");
-            return;
-        }
 
         isGenerating = true;
 
