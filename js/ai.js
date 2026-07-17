@@ -13,24 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let chatLogs = [];    // format: { timestamp: Date, sender: string, text: string }
     let isGenerating = false;
 
-    // Helper to decode Base64 obfuscated key if provided
-    function getDecryptedKey(key) {
-        if (!key) return "";
-        const trimmed = key.trim();
-        if (trimmed.startsWith("AIzaSy")) {
-            return trimmed;
-        }
-        try {
-            const decoded = atob(trimmed);
-            if (decoded.startsWith("AIzaSy")) {
-                return decoded;
-            }
-        } catch (e) {
-            // Decyption failed
-        }
-        return trimmed;
-    }
-
     // Parse years and count dynamically from THESES_AI_TEXT
     let dynamicTotalCount = 103;
     let dynamicMinYear = 2000;
@@ -56,16 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (aiYearsEl) aiYearsEl.textContent = `${dynamicMinYear}〜${dynamicMaxYear}年度`;
     const aiCountEl = document.getElementById("ai-total-count");
     if (aiCountEl) aiCountEl.textContent = dynamicTotalCount;
-
-
-    // Verify API Key from config.js
-    const apiKeyRaw = typeof GEMINI_API_KEY !== 'undefined' ? GEMINI_API_KEY : "YOUR_API_KEY_HERE";
-    const apiKey = getDecryptedKey(apiKeyRaw);
-    const isApiKeyConfigured = apiKey && apiKey !== "YOUR_API_KEY_HERE" && apiKey.trim() !== "";
-
-    if (!isApiKeyConfigured) {
-        appendSystemWarning("警告: プロジェクトルートの `config.js` 内の API キーが正しく設定されていません。`config.js` を開き、有効な Gemini API キーを設定してください。");
-    }
 
     // === Message Display ===
     function appendMessage(role, text) {
@@ -205,7 +177,7 @@ ${thesisDatabaseText}
 5. データベースにない分野や無関係のテーマについて尋ねられた場合は、「当研究室のデータベースには該当する論文はありませんが、一般的なアプローチとしては...」と前置きして説明してください。
         `.trim();
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${apiKey}`;
+        const apiUrl = "https://gemini-fastapi-proxy-x3xa.onrender.com/api/gemini";
 
         const requestBody = {
             contents: chatHistory,

@@ -18,3 +18,9 @@ Desktop.ini
 .gemini/
 config.js
 
+# Dependencies and caches
+node_modules/
+.env
+__pycache__/
+venv/
+.venv/

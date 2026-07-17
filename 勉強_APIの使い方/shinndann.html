@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAIST Life Compass 診断</title>
+    <link rel="stylesheet" href="./src/shinndann.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Original Diagnosis Tool</p>
+          <h1>JAIST Life Compass 診断</h1>
+          <p class="lead">
+            今の気分や学び方から、あなたに合うJAISTでの過ごし方を診断します。
+          </p>
+        </div>
+        <div class="hero-panel">
+          <span class="hero-number">05.29</span>
+          <span class="hero-caption">課題提出用ページ</span>
+        </div>
+      </section>
+
+      <form id="diagnosis-form" class="diagnosis-layout">
+        <section class="form-area" aria-label="診断フォーム">
+          <div class="field-row">
+            <label for="user-name">名前</label>
+            <input
+              id="user-name"
+              name="userName"
+              type="text"
+              placeholder="例: 山田 太郎"
+            />
+          </div>
+
+          <fieldset class="question-block">
+            <legend>1. 研究室に入った瞬間のあなたは？</legend>
+            <label><input type="radio" name="condition" value="すぐ集中モードに入る" />すぐ集中モードに入る</label>
+            <label><input type="radio" name="condition" value="まずコーヒーで再起動する" />まずコーヒーで再起動する</label>
+            <label><input type="radio" name="condition" value="面白そうな話題を探す" />面白そうな話題を探す</label>
+            <label><input type="radio" name="condition" value="誰かと軽く話してから始める" />誰かと軽く話してから始める</label>
+          </fieldset>
+
+          <fieldset class="question-block">
+            <legend>2. 課題の締切が近いときの動き方は？</legend>
+            <label><input type="radio" name="workStyle" value="計画を立てて順番に倒す" />計画を立てて順番に倒す</label>
+            <label><input type="radio" name="workStyle" value="短い集中を何度も重ねる" />短い集中を何度も重ねる</label>
+            <label><input type="radio" name="workStyle" value="友人に相談して突破口を探す" />友人に相談して突破口を探す</label>
+            <label><input type="radio" name="workStyle" value="まず動くものを作って勢いを出す" />まず動くものを作って勢いを出す</label>
+          </fieldset>
+
+          <fieldset class="question-block">
+            <legend>3. 週末にひとつだけ回復アイテムを選ぶなら？</legend>
+            <label><input type="radio" name="weekend" value="誰にも邪魔されない作業時間" />誰にも邪魔されない作業時間</label>
+            <label><input type="radio" name="weekend" value="金沢での寄り道と散歩" />金沢での寄り道と散歩</label>
+            <label><input type="radio" name="weekend" value="料理や趣味に没頭する時間" />料理や趣味に没頭する時間</label>
+            <label><input type="radio" name="weekend" value="友人とのごはんや雑談" />友人とのごはんや雑談</label>
+          </fieldset>
+
+          <fieldset class="question-block">
+            <legend>4. 作業で詰まったとき、まず何をする？</legend>
+            <label><input type="radio" name="stuckStyle" value="資料を読み直して原因を探す" />資料を読み直して原因を探す</label>
+            <label><input type="radio" name="stuckStyle" value="一度席を立って頭を冷やす" />一度席を立って頭を冷やす</label>
+            <label><input type="radio" name="stuckStyle" value="誰かに話して整理する" />誰かに話して整理する</label>
+            <label><input type="radio" name="stuckStyle" value="別の方法を試して突破する" />別の方法を試して突破する</label>
+          </fieldset>
+
+          <fieldset class="question-block">
+            <legend>5. 友人から見たあなたは、たぶんどの役？</legend>
+            <label><input type="radio" name="friendRole" value="落ち着いた作戦担当" />落ち着いた作戦担当</label>
+            <label><input type="radio" name="friendRole" value="場を明るくする雑談担当" />場を明るくする雑談担当</label>
+            <label><input type="radio" name="friendRole" value="気づいたら形にしている実装担当" />気づいたら形にしている実装担当</label>
+            <label><input type="radio" name="friendRole" value="疲れた人を休ませる調整担当" />疲れた人を休ませる調整担当</label>
+          </fieldset>
+
+          <div class="field-row">
+            <label for="free-text">最近の自分について</label>
+            <textarea
+              id="free-text"
+              name="freeText"
+              rows="5"
+              placeholder="例: 最近は夜に作業が進みやすい。けれど午前中をもっと上手く使いたい。"
+            ></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="submit-button">診断する</button>
+            <button type="button" id="reset-button">リセット</button>
+          </div>
+        </section>
+
+        <aside class="result-area" aria-label="診断結果">
+          <p class="result-label">Diagnosis Result</p>
+          <h2 id="result-title">入力後に診断できます</h2>
+          <p id="result-text">
+            質問に答えて「診断する」を押すと、ここに結果が表示されます。
+          </p>
+          <dl class="result-meta">
+            <div>
+              <dt>LLM</dt>
+              <dd id="llm-status">Google Gemini 構造を準備済み</dd>
+            </div>
+            <div>
+              <dt>入力数</dt>
+              <dd id="answer-count">0 / 7</dd>
+            </div>
+          </dl>
+        </aside>
+      </form>
+    </main>
+    <script>
+      window.LLM_API_ENDPOINT = "https://gemini-fastapi-proxy-x3xa.onrender.com/api/gemini";
+    </script>
+    <script src="./src/shinndann.js"></script>
+  </body>
+</html>
