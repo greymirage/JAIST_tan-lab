@@ -1,161 +1,6 @@
-// 1. LocalStorage Custom Theses Handling
-const KEYWORD_NORMALIZE = {
-    // === スマートホーム ===
-    "smarthome": "スマートホーム",
-    "smart home": "スマートホーム",
-    "smart homes": "スマートホーム",
-    "smart house": "スマートホーム",
-    "smart home environment": "スマートホーム",
-    "aiops for smart homes": "スマートホーム",
+// js/app.js - Main Thesis Database App Logic
+// (KEYWORD_NORMALIZE and cleanKeyword are loaded globally from js/normalize.js)
 
-    // === IoT ===
-    "internet of things": "IoT",
-    "iot (internet of things)": "IoT",
-    "iot（モノのインターネット）": "IoT",
-
-    // === ホームネットワーク ===
-    "home network": "ホームネットワーク",
-    "home network system": "ホームネットワーク",
-    "home networks": "ホームネットワーク",
-    "homenetwork": "ホームネットワーク",
-    "home-network": "ホームネットワーク",
-    "ホームネットワークシステム": "ホームネットワーク",
-    "integrated home network service": "ホームネットワーク",
-    "home service platform": "ホームネットワーク",
-    "home network simulation": "ホームネットワーク",
-
-    // === デジタルツイン ===
-    "digital twin": "デジタルツイン",
-    "digital twins": "デジタルツイン",
-
-    // === メタデータ ===
-    "metadata": "メタデータ",
-
-    // === シミュレーション ===
-    "simulation": "シミュレーション",
-    "large-scale simulation": "シミュレーション",
-    "simulation integration": "シミュレーション",
-    "simulate": "シミュレーション",
-    "iot area network simulation": "シミュレーション",
-
-    // === マルチエージェント / コミュニティシミュレータ ===
-    "multi-agent simulation": "マルチエージェントシミュレーション",
-    "community simulator": "コミュニティシミュレータ",
-    "home environment simulator": "ホームシミュレータ",
-
-    // === CPS（サイバーフィジカルシステム）===
-    "cyber-physical system": "CPS",
-    "cyber-physical systems": "CPS",
-    "cyber physical system": "CPS",
-    "cyber physical systems": "CPS",
-    "サイバーフィジカルシステム": "CPS",
-
-    // === センサネットワーク ===
-    "sensor networks": "センサネットワーク",
-    "sensor network": "センサネットワーク",
-    "wireless sensor network": "センサネットワーク",
-    "wireless sensor networks": "センサネットワーク",
-    "ワイヤレスセンサーネットワーク": "センサネットワーク",
-
-    // === HEMS / EMS / CEMS ===
-    "home energy management system": "HEMS",
-    "hems": "HEMS",
-    "energy management system": "EMS",
-    "エネルギーマネジメントシステム": "EMS",
-    "cems": "CEMS",
-
-    // === テストベッド ===
-    "testbed": "テストベッド",
-    "network testbed": "テストベッド",
-    "distributed testbed": "テストベッド",
-    "large scale testbed": "テストベッド",
-    "large-scale testbed": "テストベッド",
-
-    // === ネットワーク実験 / エミュレーション ===
-    "network experiment": "ネットワーク実験",
-    "network emulation": "ネットワークエミュレーション",
-    "emulation": "エミュレーション",
-
-    // === ストリーミング ===
-    "streaming": "ストリーミング",
-    "stream": "ストリーミング",
-
-    // === ビデオネットワーク ===
-    "video network": "ビデオネットワーク",
-    "video-network": "ビデオネットワーク",
-    "videonetwork": "ビデオネットワーク",
-
-    // === 資源管理 ===
-    "resource management": "資源管理",
-    "network resource management": "ネットワーク資源管理",
-    "resource management agent": "資源管理エージェント",
-
-    // === 遠隔教育 ===
-    "distance education": "遠隔教育",
-
-    // === 相互接続 ===
-    "interconnection": "相互接続",
-    "interconnectio": "相互接続",
-    "interconnecti": "相互接続",
-
-    // === セキュリティ ===
-    "security": "セキュリティ",
-    "secured communication": "セキュリティ",
-    "network security": "ネットワークセキュリティ",
-    "cyber security": "サイバーセキュリティ",
-    "cybersecurity": "サイバーセキュリティ",
-
-    // === ホームシミュレータ ===
-    "home simulator": "ホームシミュレータ",
-
-    // === ECHONET Lite ===
-    "echonetlite": "ECHONET Lite",
-    "echonet lite": "ECHONET Lite",
-    "エコーネットライト": "ECHONET Lite",
-
-    // === ユビキタス ===
-    "ubiquitous computing": "ユビキタスコンピューティング",
-    "ubiquitous networks": "ユビキタスネットワーク",
-    "pervasive computing": "ユビキタスコンピューティング",
-
-    // === SDN / OpenFlow ===
-    "software defined network": "SDN",
-    "software defined networking": "SDN",
-
-    // === ルーティング ===
-    "routing algorithm": "ルーティング",
-    "adaptive routing": "ルーティング",
-    "multipath routing": "マルチパスルーティング",
-    "multipath": "マルチパスルーティング",
-    "potential routing": "ルーティング",
-    "overlay network": "オーバーレイネットワーク",
-
-    // === 機械学習 ===
-    "machine learning": "機械学習",
-    "machine learning based network management": "機械学習",
-
-    // === 異常検知 ===
-    "anomaly detection": "異常検知",
-    "indoor climate anomaly detection": "異常検知",
-
-    // === プライバシー ===
-    "privacy preservation": "プライバシー保護",
-    "privacy-policy management": "プライバシー保護",
-
-    // === 人間行動認識 ===
-    "human activity recognition": "行動認識",
-    "activity recognition framework": "行動認識",
-    "activity of daily living": "行動認識",
-};
-
-function cleanKeyword(kw) {
-    kw = kw.trim();
-    const kwLower = kw.toLowerCase();
-    if (KEYWORD_NORMALIZE[kwLower]) {
-        return KEYWORD_NORMALIZE[kwLower];
-    }
-    return kw;
-}
 
 let customTheses = [];
 try {
@@ -222,15 +67,18 @@ window.addEventListener('DOMContentLoaded', () => {
         
         sections.forEach(s => {
             const sectionTop = s.offsetTop;
-            if (pageYOffset >= sectionTop - 120) {
+            if (window.scrollY >= sectionTop - 120) {
                 current = s.getAttribute('id');
             }
         });
 
         navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === current) {
-                link.classList.add('active');
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                link.classList.remove('active');
+                if (href.substring(1) === current) {
+                    link.classList.add('active');
+                }
             }
         });
     });
@@ -238,7 +86,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // 3. Render Statistics Header
 function initStats() {
-    document.getElementById('stat-total').textContent = window.ALL_DATA.length;
+    const totalCount = window.ALL_DATA.length;
+    document.getElementById('stat-total').textContent = totalCount;
     document.getElementById('stat-masters').textContent = window.ALL_DATA.filter(t => t.degree_type === "修士").length;
     document.getElementById('stat-phds').textContent = window.ALL_DATA.filter(t => t.degree_type === "博士").length;
 
@@ -246,6 +95,39 @@ function initStats() {
     const allKws = window.ALL_DATA.flatMap(t => t.keywords).filter(k => k && k !== "未登録");
     const uniqueKws = new Set(allKws);
     document.getElementById('stat-keywords').textContent = uniqueKws.size;
+
+    // Dynamic copyright year in footer
+    const footerYearEl = document.getElementById('footer-year');
+    if (footerYearEl) {
+        footerYearEl.textContent = new Date().getFullYear();
+    }
+
+    // Dynamic years & count in About section
+    const years = window.ALL_DATA.map(t => t.year).filter(Boolean);
+    if (years.length > 0) {
+        const minYear = Math.min(...years);
+        const maxYear = Math.max(...years);
+        const diffYears = maxYear - minYear + 1;
+        
+        const rangeEl = document.getElementById('header-year-range');
+        if (rangeEl) rangeEl.textContent = `${minYear} - ${maxYear}`;
+        
+        const aboutYearsEl = document.getElementById('about-ai-years');
+        if (aboutYearsEl) aboutYearsEl.textContent = `過去${diffYears}年分（${minYear}〜${maxYear}年度）`;
+        
+        const aboutCountEl = document.getElementById('about-ai-count');
+        if (aboutCountEl) aboutCountEl.textContent = totalCount;
+
+        // Dynamic Tab Year labels (e.g. 近15年 (2012-2026))
+        const btn15y = document.getElementById('btn-tab-15y');
+        if (btn15y) btn15y.textContent = `近15年 (${maxYear - 14}-${maxYear})`;
+
+        const btn10y = document.getElementById('btn-tab-10y');
+        if (btn10y) btn10y.textContent = `近10年 (${maxYear - 9}-${maxYear})`;
+
+        const btn5y = document.getElementById('btn-tab-5y');
+        if (btn5y) btn5y.textContent = `近5年 (${maxYear - 4}-${maxYear})`;
+    }
 }
 
 // 4. Filters & Facets Setup
@@ -386,8 +268,8 @@ function renderThesisCards(theses) {
         const authorInfo = document.createElement('div');
         authorInfo.className = "thesis-author-info";
         authorInfo.innerHTML = `
-            <span class="thesis-author">${t.author}</span>
-            <span class="thesis-author-ruby">${t.author_ruby || ''}</span>
+            <span class="thesis-author">${escapeHtml(t.author)}</span>
+            <span class="thesis-author-ruby">${escapeHtml(t.author_ruby || '')}</span>
         `;
         card.appendChild(authorInfo);
 
@@ -412,8 +294,8 @@ function renderThesisCards(theses) {
         const footer = document.createElement('div');
         footer.className = "thesis-footer";
         footer.innerHTML = `
-            <span class="thesis-sv">指導教員: ${t.supervisor}</span>
-            <a href="${t.uri}" target="_blank" class="thesis-link">
+            <span class="thesis-sv">指導教員: ${escapeHtml(t.supervisor)}</span>
+            <a href="${escapeHtml(t.uri)}" target="_blank" class="thesis-link">
                 登録情報 <i class="fa-solid fa-up-right-from-square"></i>
             </a>
         `;

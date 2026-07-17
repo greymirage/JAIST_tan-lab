@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>論文データ Q&A アシスタント | 丹研究室</title>
+    <meta name="description" content="丹研究室の過去の学位論文データ（修士・博士）について、Gemini 3.1 Flash-Lite AIモデルを利用して対話形式で質問・相談ができるアシスタントページです。">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +49,7 @@
                 <div class="message assistant">
                     <div class="sender-label">アシスタント</div>
                     <div class="message-content">
-                        こんにちは。丹研究室の学位論文データベース（2000〜2026年度、計103件）に基づいて、研究テーマの探索や先輩方の研究内容についての質問にお答えします。
+                        こんにちは。丹研究室の学位論文データベース（<span id="ai-years-range">2000〜2026年度</span>、計<span id="ai-total-count">103</span>件）に基づいて、研究テーマの探索や先輩方の研究内容についての質問にお答えします。
                         気になるキーワードやテーマを入力するか、以下の質問例をクリックしてください。
                     </div>
                 </div>
@@ -77,6 +78,10 @@
             </div>
         </section>
     </main>
+
+    <footer>
+        <p>&copy; <span id="footer-year">2026</span> JAIST 情報科学系 丹研究室. All Rights Reserved.</p>
+    </footer>
 
     <!-- Data & Scripts -->
     <script src="config.js"></script>

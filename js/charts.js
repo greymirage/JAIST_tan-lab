@@ -73,12 +73,13 @@ function buildYearlyChart() {
 
 // Keyword Ranking Chart with period tabs
 function updateKeywordChart(period) {
-    const currentYear = 2026;
+    const years = window.ALL_DATA.map(t => t.year).filter(Boolean);
+    const currentYear = years.length > 0 ? Math.max(...years) : new Date().getFullYear();
     let filterFunc = t => true;
 
-    if (period === '15y') filterFunc = t => (currentYear - t.year <= 15);
-    else if (period === '10y') filterFunc = t => (currentYear - t.year <= 10);
-    else if (period === '5y') filterFunc = t => (currentYear - t.year <= 5);
+    if (period === '15y') filterFunc = t => (currentYear - t.year < 15);
+    else if (period === '10y') filterFunc = t => (currentYear - t.year < 10);
+    else if (period === '5y') filterFunc = t => (currentYear - t.year < 5);
 
     // Collect keyword frequencies
     const kwCounts = {};
@@ -96,7 +97,10 @@ function updateKeywordChart(period) {
     // Handle tab active state UI
     const buttons = document.querySelectorAll('.tab-buttons .tab-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
-    const targetBtn = Array.from(buttons).find(b => b.innerText.includes(period === 'all' ? '全期間' : period === '15y' ? '近15年' : period === '10y' ? '近10年' : '近5年'));
+    const targetBtn = Array.from(buttons).find(b => {
+        if (period === 'all') return b.textContent.includes('全期間');
+        return b.id === `btn-tab-${period}`;
+    });
     if (targetBtn) targetBtn.classList.add('active');
 
     const ctx = document.getElementById('keywordChart').getContext('2d');
@@ -139,7 +143,7 @@ function updateKeywordChart(period) {
                 onClick: (evt, elements) => {
                     if (elements.length > 0) {
                         const index = elements[0].index;
-                        const targetKw = labels[index];
+                        const targetKw = window.keywordChartInstance.data.labels[index];
                         document.getElementById('filter-kw').value = targetKw;
                         document.getElementById('filter-year').value = "";
                         handleSearchFilter();

@@ -132,7 +132,8 @@
     line-height: 1.6;
     color: var(--text-primary);
     box-shadow: none;
-    word-break: break-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
     white-space: pre-line;
 }
 

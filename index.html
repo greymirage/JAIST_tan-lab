@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>丹研究室 学位論文・研究トレンド総覧</title>
+    <meta name="description" content="北陸先端科学技術大学院大学 (JAIST) 情報科学系・丹康雄教授の研究室における過去の修士論文・博士論文のデータベースおよび研究トレンド分析ダッシュボードです。">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +22,7 @@
         <div class="header-container">
             <div class="logo-area">
                 <h1>北陸先端科学技術大学院大学<br>丹研究室　ロンブン</h1>
-                <p>修士・博士 学位論文データベース (2000 - 2026)</p>
+                <p>修士・博士 学位論文データベース (<span id="header-year-range">2000 - 2026</span>)</p>
             </div>
             <nav>
                 <a href="#stats" class="active">概要</a>
@@ -64,7 +65,7 @@
                     <div class="step-num">03</div>
                     <div class="step-content">
                         <h3>AIアシスタントに相談する</h3>
-                        <p>右上の「AIアシスタント」タブから専用のチャット画面へ移動し、過去26年分のデータ（計103件）に基づいて研究分野の傾向分析や対話的な壁打ちを行うことができます。</p>
+                        <p>右上の「AIアシスタント」タブから専用のチャット画面へ移動し、<span id="about-ai-years">過去26年分（2000〜2026年度）</span>のデータ（計<span id="about-ai-count">103</span>件）に基づいて研究分野の傾向分析や対話的な壁打ちを行うことができます。</p>
                     </div>
                 </div>
             </div>
@@ -121,9 +122,9 @@
             </div>
             <div class="tab-buttons">
                 <button class="tab-btn active" onclick="updateKeywordChart('all')">全期間</button>
-                <button class="tab-btn" onclick="updateKeywordChart('15y')">近15年 (2012-2026)</button>
-                <button class="tab-btn" onclick="updateKeywordChart('10y')">近10年 (2017-2026)</button>
-                <button class="tab-btn" onclick="updateKeywordChart('5y')">近5年 (2022-2026)</button>
+                <button id="btn-tab-15y" class="tab-btn" onclick="updateKeywordChart('15y')">近15年</button>
+                <button id="btn-tab-10y" class="tab-btn" onclick="updateKeywordChart('10y')">近10年</button>
+                <button id="btn-tab-5y" class="tab-btn" onclick="updateKeywordChart('5y')">近5年</button>
             </div>
             <div style="height: 400px; position: relative;">
                 <canvas id="keywordChart"></canvas>
@@ -205,11 +206,16 @@
         </section>
     </main>
 
+    <footer>
+        <p>&copy; <span id="footer-year">2026</span> JAIST 情報科学系 丹研究室. All Rights Reserved.</p>
+    </footer>
+
     <!-- Floating Tooltip -->
     <div class="tooltip" id="heatmap-tooltip"></div>
 
     <!-- Data & Scripts -->
     <script src="data/data.js"></script>
+    <script src="js/normalize.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/app.js"></script>
 </body>

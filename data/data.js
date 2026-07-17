@@ -1076,7 +1076,9 @@ const THESES_DATA = [
     "author": "宋, 慶輝",
     "author_ruby": "そう, けいき",
     "keywords": [
-      "ホームネットワークシミュレーション、ユーザーモデル、関連性",
+      "ホームネットワークシミュレーション",
+      "ユーザーモデル",
+      "関連性",
       "ホームネットワーク",
       "user modeling",
       "relation"
@@ -1139,7 +1141,11 @@ const THESES_DATA = [
     "author": "磯貝, 彰則",
     "author_ruby": "いそがい,　あきのり",
     "keywords": [
-      "センサ・ネットワーク，ZigBee，LR-WPAN，グルーピング，省電力",
+      "センサ・ネットワーク",
+      "ZigBee",
+      "LR-WPAN",
+      "グルーピング",
+      "省電力",
       "センサネットワーク",
       "ZigBee",
       "LR-WPAN",
@@ -1187,7 +1193,10 @@ const THESES_DATA = [
     "author": "池田, 智紀",
     "author_ruby": "いけだ, とものり",
     "keywords": [
-      "ボリュームデータ、リアルタイム、符号化/復号化、代表値インデキシング",
+      "ボリュームデータ",
+      "リアルタイム",
+      "符号化/復号化",
+      "代表値インデキシング",
       "Volume data",
       "リアルタイム",
       "Encoding"
@@ -1207,7 +1216,11 @@ const THESES_DATA = [
     "author": "出村, 哲也",
     "author_ruby": "でむら,　てつや",
     "keywords": [
-      "ホームネットワーク，宅内センサ，レガシーデバイス，連携サービス，サービス記述言語",
+      "ホームネットワーク",
+      "宅内センサ",
+      "レガシーデバイス",
+      "連携サービス",
+      "サービス記述言語",
       "ホームネットワーク",
       "coordinated service",
       "legacy device"
@@ -1227,7 +1240,12 @@ const THESES_DATA = [
     "author": "増田, 耕一",
     "author_ruby": "ますだ,　こういち",
     "keywords": [
-      "ホームネットワーク，LegacyDevice，異常検知，家電モデル，センサ，動的検出",
+      "ホームネットワーク",
+      "LegacyDevice",
+      "異常検知",
+      "家電モデル",
+      "センサ",
+      "動的検出",
       "ホームネットワーク",
       "LegacyDevice",
       "monitoring system"
@@ -1292,7 +1310,11 @@ const THESES_DATA = [
     "author": "岩田, 耕治",
     "author_ruby": "いわた, こうじ",
     "keywords": [
-      "ストリーミング，中間同期化ノード，シグナリング，デジタルオーディオミキシング，第三者呼制御",
+      "ストリーミング",
+      "中間同期化ノード",
+      "シグナリング",
+      "デジタルオーディオミキシング",
+      "第三者呼制御",
       "ストリーミング",
       "Intermediate Synchronizer Node"
     ],
@@ -1311,7 +1333,12 @@ const THESES_DATA = [
     "author": "松崎, 寛之",
     "author_ruby": "まつざき,　ひろゆき",
     "keywords": [
-      "ホームネットワーク，LegacyDevice，赤外線，センサ，有限状態機械，連動動作",
+      "ホームネットワーク",
+      "LegacyDevice",
+      "赤外線",
+      "センサ",
+      "有限状態機械",
+      "連動動作",
       "ホームネットワーク",
       "LegacyDevice",
       "infrared rays",
@@ -1332,7 +1359,9 @@ const THESES_DATA = [
     "author": "浜本, 賢一",
     "author_ruby": "はまもと,　けんいち",
     "keywords": [
-      "ホームネットワーク，家電モデル，ゲートウェイ",
+      "ホームネットワーク",
+      "家電モデル",
+      "ゲートウェイ",
       "ホームネットワーク",
       "gateway"
     ],
@@ -1398,7 +1427,10 @@ const THESES_DATA = [
     "author": "明壁, 祐基",
     "author_ruby": "あすかべ,　ゆうき",
     "keywords": [
-      "ストリーミング，RTP，アドミッション制御，XML",
+      "ストリーミング",
+      "RTP",
+      "アドミッション制御",
+      "XML",
       "ストリーミング",
       "RTP",
       "admission control",
@@ -1440,8 +1472,11 @@ const THESES_DATA = [
     "author": "土屋, 健",
     "author_ruby": "つちや, たけし",
     "keywords": [
-      "マルチストリーム、同期、RTP",
-      "ジッタ吸収、バッファリング",
+      "マルチストリーム",
+      "同期",
+      "RTP",
+      "ジッタ吸収",
+      "バッファリング",
       "Multi-stream",
       "synchronization",
       "RTP",
@@ -1510,7 +1545,8 @@ const THESES_DATA = [
     "author": "石井, 智康",
     "author_ruby": "いしい, ともやす",
     "keywords": [
-      "ホームネットワーク，LegacyDevice",
+      "ホームネットワーク",
+      "LegacyDevice",
       "赤外線",
       "状態機械",
       "連動動作",
@@ -1578,7 +1614,11 @@ const THESES_DATA = [
     "author": "塚西, 弘幸",
     "author_ruby": "つかにし, ひろゆき",
     "keywords": [
-      "ホームネットワーク，シグナリング，AV家電機器，相互接続，SIP",
+      "ホームネットワーク",
+      "シグナリング",
+      "AV家電機器",
+      "相互接続",
+      "SIP",
       "ホームネットワーク",
       "AV devices",
       "相互接続"
@@ -1666,7 +1706,8 @@ const THESES_DATA = [
     "author": "澤田, 憲志",
     "author_ruby": "さわだ, けんじ",
     "keywords": [
-      "遠隔教育，オンデマンド配信",
+      "遠隔教育",
+      "オンデマンド配信",
       "マルチビデオストリーム",
       "ストリーミング",
       "評価",
@@ -1710,7 +1751,8 @@ const THESES_DATA = [
     "author": "大林, 隆之",
     "author_ruby": "おおばやし, たかゆき",
     "keywords": [
-      "ビデオネットワーク，Ethernet",
+      "ビデオネットワーク",
+      "Ethernet",
       "VLAN",
       "ネットワーク資源管理",
       "QoS",
@@ -1732,7 +1774,9 @@ const THESES_DATA = [
     "author": "吉岡, 正巳",
     "author_ruby": "よしおか, まさみ",
     "keywords": [
-      "ビデオネットワーク，放送型，シグナリング",
+      "ビデオネットワーク",
+      "放送型",
+      "シグナリング",
       "ビデオネットワーク",
       "Broadcast",
       "Signaling Cost"
@@ -1795,7 +1839,8 @@ const THESES_DATA = [
     "author": "倉岡, 貴志",
     "author_ruby": "くらおか, たかし",
     "keywords": [
-      "マルチメディアネットワーク，資源管理エージェント",
+      "マルチメディアネットワーク",
+      "資源管理エージェント",
       "DV機器",
       "データベース",
       "マルチメディアネットワーク",
@@ -1816,7 +1861,11 @@ const THESES_DATA = [
     "author": "木村, 範彦",
     "author_ruby": "きむら, のりひこ",
     "keywords": [
-      "マルチキャスト、マルチメディア、ATM、中間ノード、SDL",
+      "マルチキャスト",
+      "マルチメディア",
+      "ATM",
+      "中間ノード",
+      "SDL",
       "マルチキャスト",
       "マルチメディア",
       "ATM",
@@ -1860,7 +1909,11 @@ const THESES_DATA = [
     "author": "近藤, 真己",
     "author_ruby": "こんどう, まさき",
     "keywords": [
-      "発想支援システム，発散的思考，ブレインストーミング，グループウェア，図的インターフェース",
+      "発想支援システム",
+      "発散的思考",
+      "ブレインストーミング",
+      "グループウェア",
+      "図的インターフェース",
       "creativity support system",
       "divergent thinking"
     ],
@@ -2172,7 +2225,9 @@ const THESES_DATA = [
     "author": "小峯, 隆宏",
     "author_ruby": "こみね,　たかひろ",
     "keywords": [
-      "遠隔会議，自然会話，アイコンタクト",
+      "遠隔会議",
+      "自然会話",
+      "アイコンタクト",
       "遠隔会議",
       "自然会話",
       "アイコンタクト"

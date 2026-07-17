@@ -31,6 +31,34 @@ document.addEventListener("DOMContentLoaded", () => {
         return trimmed;
     }
 
+    // Parse years and count dynamically from THESES_AI_TEXT
+    let dynamicTotalCount = 103;
+    let dynamicMinYear = 2000;
+    let dynamicMaxYear = 2026;
+    let dynamicDiffYears = 27;
+    
+    if (typeof THESES_AI_TEXT !== 'undefined' && THESES_AI_TEXT.trim()) {
+        const lines = THESES_AI_TEXT.trim().split("\n");
+        dynamicTotalCount = lines.length;
+        const years = lines.map(line => {
+            const match = line.match(/^\[(\d+)\]/);
+            return match ? parseInt(match[1]) : null;
+        }).filter(y => y !== null);
+        if (years.length > 0) {
+            dynamicMinYear = Math.min(...years);
+            dynamicMaxYear = Math.max(...years);
+            dynamicDiffYears = dynamicMaxYear - dynamicMinYear + 1;
+        }
+    }
+
+    // Update UI elements with dynamic counts
+    const aiYearsEl = document.getElementById("ai-years-range");
+    if (aiYearsEl) aiYearsEl.textContent = `${dynamicMinYear}〜${dynamicMaxYear}年度`;
+    const aiCountEl = document.getElementById("ai-total-count");
+    if (aiCountEl) aiCountEl.textContent = dynamicTotalCount;
+    const footerYearEl = document.getElementById("footer-year");
+    if (footerYearEl) footerYearEl.textContent = new Date().getFullYear();
+
     // Verify API Key from config.js
     const apiKeyRaw = typeof GEMINI_API_KEY !== 'undefined' ? GEMINI_API_KEY : "YOUR_API_KEY_HERE";
     const apiKey = getDecryptedKey(apiKeyRaw);
@@ -166,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
 研究室に所属する学生や新入生が先輩方の研究を理解し、自分の研究テーマのアイデアを検討するのをサポートします。
 
 【提供された過去の学位論文データ】
-以下は2000年度から2026年度までの修士・博士学位論文の一覧です：
+以下は${dynamicMinYear}年度から${dynamicMaxYear}年度までの修士・博士学位論文の一覧です：
 ${thesisDatabaseText}
 
 【応答ガイドライン】
