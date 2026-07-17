@@ -178,7 +178,7 @@ ${thesisDatabaseText}
 5. データベースにない分野や無関係のテーマについて尋ねられた場合は、「当研究室のデータベースには該当する論文はありませんが、一般的なアプローチとしては...」と前置きして説明してください。
         `.trim();
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${apiKey}`;
 
         const requestBody = {
             contents: chatHistory,
