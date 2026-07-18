@@ -144,7 +144,17 @@ function updateKeywordChart(period) {
                     if (elements.length > 0) {
                         const index = elements[0].index;
                         const targetKw = window.keywordChartInstance.data.labels[index];
-                        document.getElementById('filter-kw').value = targetKw;
+                        const kwSelect = document.getElementById('filter-kw');
+                        // If the keyword is not in the dropdown (e.g. low-frequency kw only
+                        // visible in a time-filtered chart), dynamically add it so the
+                        // filter actually fires correctly.
+                        if (!Array.from(kwSelect.options).some(o => o.value === targetKw)) {
+                            const opt = document.createElement('option');
+                            opt.value = targetKw;
+                            opt.textContent = targetKw;
+                            kwSelect.appendChild(opt);
+                        }
+                        kwSelect.value = targetKw;
                         document.getElementById('filter-year').value = "";
                         handleSearchFilter();
                         document.getElementById('list').scrollIntoView({ behavior: 'smooth' });
