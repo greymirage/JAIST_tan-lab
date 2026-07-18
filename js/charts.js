@@ -1,5 +1,10 @@
 // 5. Build Charts & Heatmap Grid
 
+// Global state: active degree filter driven by yearly chart legend clicks
+window.ACTIVE_DEGREE_FILTER = "";
+// Remember the current keyword period so we can re-render after degree toggle
+window.currentKwPeriod = 'all';
+
 // Stacked Yearly Bar Chart (Master + PhD)
 function buildYearlyChart() {
     const ctx = document.getElementById('yearlyChart').getContext('2d');
@@ -46,6 +51,41 @@ function buildYearlyChart() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    onClick: function(e, legendItem, legend) {
+                        // Default Chart.js legend toggle behaviour
+                        Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
+
+                        // Determine which datasets are now visible
+                        const chart = window.yearlyChartInstance;
+                        const masterHidden = chart.getDatasetMeta(0).hidden;
+                        const phdHidden    = chart.getDatasetMeta(1).hidden;
+
+                        if (!masterHidden && !phdHidden) {
+                            // Both visible → no degree filter
+                            window.ACTIVE_DEGREE_FILTER = "";
+                        } else if (!masterHidden && phdHidden) {
+                            // Only master visible
+                            window.ACTIVE_DEGREE_FILTER = "修士";
+                        } else if (masterHidden && !phdHidden) {
+                            // Only PhD visible
+                            window.ACTIVE_DEGREE_FILTER = "博士";
+                        } else {
+                            // Both hidden → reset to show all
+                            window.ACTIVE_DEGREE_FILTER = "";
+                        }
+
+                        // Sync the degree dropdown in the search panel
+                        document.getElementById('filter-degree').value = window.ACTIVE_DEGREE_FILTER;
+
+                        // Re-render all dependent views
+                        updateKeywordChart(window.currentKwPeriod);
+                        buildHeatmap();
+                        handleSearchFilter();
+                    }
+                }
+            },
             scales: {
                 y: {
                     stacked: true,
@@ -73,6 +113,9 @@ function buildYearlyChart() {
 
 // Keyword Ranking Chart with period tabs
 function updateKeywordChart(period) {
+    // Persist the period so legend toggles can re-invoke with correct period
+    window.currentKwPeriod = period;
+
     const years = window.ALL_DATA.map(t => t.year).filter(Boolean);
     const currentYear = years.length > 0 ? Math.max(...years) : new Date().getFullYear();
     let filterFunc = t => true;
@@ -81,9 +124,14 @@ function updateKeywordChart(period) {
     else if (period === '10y') filterFunc = t => (currentYear - t.year < 10);
     else if (period === '5y') filterFunc = t => (currentYear - t.year < 5);
 
+    // Apply degree filter from yearly chart legend state
+    const degreeData = window.ACTIVE_DEGREE_FILTER
+        ? window.ALL_DATA.filter(t => t.degree_type === window.ACTIVE_DEGREE_FILTER)
+        : window.ALL_DATA;
+
     // Collect keyword frequencies
     const kwCounts = {};
-    window.ALL_DATA.filter(filterFunc).flatMap(t => t.keywords).forEach(k => {
+    degreeData.filter(filterFunc).flatMap(t => t.keywords).forEach(k => {
         if (k && k !== "未登録") kwCounts[k] = (kwCounts[k] || 0) + 1;
     });
 
@@ -170,12 +218,17 @@ function buildHeatmap() {
     const table = document.getElementById('heatmap-table');
     table.innerHTML = "";
 
-    // Years list
+    // Apply degree filter from yearly chart legend state
+    const heatmapData = window.ACTIVE_DEGREE_FILTER
+        ? window.ALL_DATA.filter(t => t.degree_type === window.ACTIVE_DEGREE_FILTER)
+        : window.ALL_DATA;
+
+    // Years list (always full range so time axis is stable)
     const years = [...new Set(window.ALL_DATA.map(t => t.year).filter(Boolean))].sort();
     
-    // Top 15 Keywords for the heatmap rows
+    // Top 15 Keywords for the heatmap rows (filtered by degree)
     const kwCounts = {};
-    window.ALL_DATA.flatMap(t => t.keywords).forEach(k => {
+    heatmapData.flatMap(t => t.keywords).forEach(k => {
         if (k && k !== "未登録") kwCounts[k] = (kwCounts[k] || 0) + 1;
     });
     const topKws = Object.entries(kwCounts)
@@ -213,7 +266,7 @@ function buildHeatmap() {
         row.appendChild(labelTd);
 
         years.forEach(y => {
-            const count = window.ALL_DATA.filter(t => t.year === y && t.keywords.includes(kw)).length;
+            const count = heatmapData.filter(t => t.year === y && t.keywords.includes(kw)).length;
             
             const cell = document.createElement('td');
             cell.className = `heatmap-cell hm-${count >= 4 ? '4plus' : count}`;
@@ -225,8 +278,17 @@ function buildHeatmap() {
             cell.addEventListener('mouseout', hideHeatmapTooltip);
             
             cell.addEventListener('click', () => {
-                document.getElementById('filter-kw').value = kw;
+                // Sync keyword filter
+                const kwSelect = document.getElementById('filter-kw');
+                if (!Array.from(kwSelect.options).some(o => o.value === kw)) {
+                    const opt = document.createElement('option');
+                    opt.value = kw; opt.textContent = kw;
+                    kwSelect.appendChild(opt);
+                }
+                kwSelect.value = kw;
                 document.getElementById('filter-year').value = y;
+                // Keep degree filter in sync
+                document.getElementById('filter-degree').value = window.ACTIVE_DEGREE_FILTER;
                 handleSearchFilter();
                 document.getElementById('list').scrollIntoView({ behavior: 'smooth' });
             });
