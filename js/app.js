@@ -1,6 +1,14 @@
 // js/app.js - Main Thesis Database App Logic
 // (KEYWORD_NORMALIZE and cleanKeyword are loaded globally from js/normalize.js)
 
+// Silent pre-warm (ping) to wake up the Render backend proxy early on page load
+(function preWarmBackend() {
+    fetch("https://gemini-fastapi-proxy-x3xa.onrender.com/health")
+        .catch(() => {
+            // Silently ignore network failures during pre-warm
+        });
+})();
+
 
 let customTheses = [];
 try {
